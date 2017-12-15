@@ -2,7 +2,6 @@
 # https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
 node_modules/
 bower_components/
-src/server/data/
 # other
 .tmp
 report/plato
