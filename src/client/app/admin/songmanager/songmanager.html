@@ -1,0 +1,141 @@
+<div id="content-admin">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="current">Bài hát</a>      </div>
+    <h1>Bài hát</h1>
+  </div>
+
+  <!-- Modal content -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <form name="form" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="namesong">Tên bài hát :</label><br>
+              <input type="text" class="form-control" placeholder="Tên bài hát" ng-model="vm.name" name="name" required>
+              <br><span style="color:red" ng-show="form.name.$invalid&&form.name.$touched">Tên bài hát không được để trống !!</span>
+            </div>
+            <div class="form-group">
+              <label for="namesong">Tên ca sĩ :</label><br>
+              <ui-select name="singer" required multiple ng-model="vm.singer" >
+                  <ui-select-match required style="padding-right:-10px;" placeholder="Chọn ca sĩ ...">{{$item.name}}</ui-select-match>
+                <ui-select-choices repeat="singer.name as singer in vm.singers | filter:$select.search">
+                  {{singer.name}}
+                </ui-select-choices>
+              </ui-select>
+              <multiple-autocomplete ng-model="vm.singer" object-property="name" suggestions-arr="vm.singers">
+              </multiple-autocomplete>
+              <br><span style="color:red" ng-show="form.singer.$invalid&&form.singer.$touched">Tên ca sĩ không được để trống !!</span>
+            </div>
+            <div class="form-group">
+              <label for="namesing">Nhạc sĩ :</label><br>
+              <input list="artists" name="artist" placeholder="Tên nhạc sĩ ... " ng-model="vm.artist" ng-change="vm.searchArtist()" ng-blur="vm.checkIndexArtist()" class="form-control"
+                required>
+              <datalist id="artists">
+                <option ng-repeat="artist in vm.tempartists" value="{{artist.name}}">{{artist.name}}</option>
+              </datalist>
+              <br><span style="color:red" ng-show="form.artist.$invalid&&form.artist.$touched">Tên nhạc sĩ không được để trống !!</span>
+            </div>
+            <div class="form-group">
+              <label for="casename">Thể loại :</label><br>
+              <select ng-model="vm.genre">
+                <option value="">- Thể Loại -</option>
+                <option ng-repeat="genre in vm.genres" value="{{genre.name}}">{{genre.name}}</option>
+              </select>
+              <select ng-model="vm.country">
+                <option value="Việt Nam">Việt Nam</option>
+                <option value="Âu Mỹ">Âu Mỹ</option>
+                <option value="Hàn Quốc">Hàn Quốc</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="namesong">Hình đại diện :</label><br>
+              <input class="form-control" type="file" ngf-select="" name="filehinh" ng-change="vm.checkfilehinh(vm.img)" ng-model="vm.img"
+                required="">
+              <img ng-if="!vm.showdbs" ngf-src="vm.img" width="50px" height="50px" alt="">
+              <img ng-if="vm.showdbs" ngf-src="FILE||'./src/server/data/img/'+vm.img" width="50px" height="50px" alt="">
+              <br><span style="color:red" ng-show="form.filehinh.$invalid&&form.filehinh.$touched">Hình đại diện không được để trống !!</span>
+            </div>
+            <div class="form-group">
+              <label for="namesong">File mp3 :</label><br>
+              <br>
+              <input class="form-control" type="file" ngf-select="" name="fileMp3" ng-change="vm.checkfilemp3(vm.url)" ng-model="vm.url"
+                required="">
+              <input ng-if="!vm.showmp3" ng-disabled="true;" type="text" class="form-control" ng-model="vm.url.name" >
+              <input ng-if="vm.showmp3" ng-disabled="true;" type="text" class="form-control" ng-model="vm.url">
+              <br><span style="color:red" ng-show="form.fileMp3.$invalid&&form.fileMp3.$touched">File nhạc không được để trống !!</span>
+            </div>
+            <div class="form-group">
+              <label for="lyric">Lời bài hát :</label><br>
+              <textarea type="text" class="form-control" ng-model="vm.lyrics" placeholder="Lời bài hát .."></textarea>
+            </div>
+          </form>
+          <!-- button add db -->
+            <button ng-if="vm.adddb" id="btnSave" ng-disabled="form.artist.$untouched||form.singer.$untouched||form.name.$untouched||form.fileMp3.$untouched||form.filehinh.$untouched||form.singer.$invalid&&form.singer.$touched||form.fileMp3.$invalid&&form.fileMp3.$touched||form.filehinh.$invalid&&form.filehinh.$touched||
+          form.artist.$invalid&&form.artist.$touched||form.singer.$invalid&&form.singer.$touched||form.name.$invalid&&form.name.$touched"
+            type="submit" data-dismiss="modal" ng-click="vm.AddInput(vm.id)" class="btn btn-success">Save</button>
+            <!-- button update db  -->
+            <button ng-if="!vm.adddb" id="btnSave" ng-disabled="form.singer.$invalid&&form.singer.$touched||form.fileMp3.$invalid&&form.fileMp3.$touched||form.filehinh.$invalid&&form.filehinh.$touched||
+          form.artist.$invalid&&form.artist.$touched||form.singer.$invalid&&form.singer.$touched||form.name.$invalid&&form.name.$touched"
+            type="submit" data-dismiss="modal" ng-click="vm.EditInput(vm.id)" class="btn btn-success">Save</button>
+          <!-- button clear -->
+            <button id="btnClear" type="submit" ng-click="vm.resetData()" class="btn btn-success">Clear</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+      </div>
+    </div>
+  </div>
+  <!-- end Modal-->
+
+  <div class="container-fluid">
+    <div style="padding-top:15px">
+      <hr>
+    </div>
+    <div class="row-fluid">
+      <div class="widget-box">
+        <div class="widget-content nopadding">
+          <table class="table table-bordered data-table">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Tên bài hát</th>
+                <th>Ca sĩ</th>
+                <th>Nhạc sĩ</th>
+                <th>Thể loại</th>
+                <th>MP3</th>
+                <th>Hình ảnh</th>
+                <th>Lời bài hát</th>
+                <th><input class="btn btn-primary" ng-click="vm.Add()" data-toggle="modal" data-target="#myModal" type="button"
+                    value="Thêm" /></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="song in vm.songs">
+                <div class="editText">
+                  <td style="text-align:center;">{{$index+1}}</td>
+                  <td style="text-align:center;">{{song.name}}</td>
+                  <td style="text-align:center;">{{song.singer}}</td>
+                  <td style="text-align:center;">{{song.artist}}</td>
+                  <td style="text-align:center;">{{song.genre}}</td>
+                  <td style="text-align:center;">{{song.url}}</td>
+                  <td style="text-align:center;"><img width="50px" height="50px" ngf-src="FILE||'./src/server/data/img/'+song.img" alt=""></td>
+                  <td style="text-align:center;">{{song.lyrics}}</td>
+                </div>
+                <td>
+                  <!-- button edit -->
+                  <input style="width:40% !important;" class="btn btn-warning" data-toggle="modal" data-target="#myModal" ng-click="vm.Edit(song._id)"
+                    type="button" value="Sửa" />
+                  <!-- button delete -->
+                  <input style="width:40% !important;" class="btn btn-danger" ng-click="vm.Del(song._id);" type="button" value="Xóa" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

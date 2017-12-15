@@ -1,0 +1,86 @@
+<section class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 widget-content">
+                    <div class="row" style="padding-top:10px;">
+                        <div class="col-xs-offset-10 col-xs-2 col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2">
+                            <button class="btn btn-success" style="float:right; width:104px; margin:0;padding:4px" data-toggle="modal" data-target="#Modalplaylist">Thêm Playlist</button>
+                            <select name="singleSelect" id="singleSelect" ng-model="vm.select" style="float:right"> 
+                                <option value="update">Mới</option> <!-- interpolation -->
+                                <option value="-plays">Nghe nhiều</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-left:5px;">
+                        <div id="Tam-unit-list">
+                            <h5 style="margin-top:-30px">Có tất cả {{vm.playlists.length}} playlist</h5>
+                            <div class="row vi-list" style="padding:14px" ng-repeat="playlist in vm.playlists |orderBy : vm.select">
+                                <div class="col-xs-9 col-sm-2 col-md-2">
+                                    <a class="vi-contain" ui-sref="playlistDetail({id:playlist._id})">
+                                        <img class="img-responsive vi-img" ng-src="/src/server/data/img/playlist.png" >
+                                    </a>
+                                </div>
+                                <div class="col-xs-10 col-sm-9 col-md-9">
+                                    <a class="vi-titms" style="font-size:18px" ui-sref="playlistDetail({id:playlist._id})">{{playlist.name}}</a><br>
+                                    <span class="kh-songText">Số bài : </span><span class="vi-songText"> {{playlist.listsong.length}} </span><br>
+                                    <span class="kh-songText">Lượt nghe : </span><span class="vi-songText"> {{playlist.plays}}</span><br>
+                                    <span class="kh-songText">Ngày đăng : </span><span class="vi-songText"> {{playlist.update}} </span>
+                                </div>
+                                <div class="col-xs-1 col-sm-1 col-md-1">
+                                    <button ng-click="vm.getObj(playlist)" class="btn btn-primary" style="width:45px;margin-bottom:5px" data-toggle="modal" data-target="#Edit">Sửa</button>
+                                    <button ng-click="vm.deletePlaylist(playlist._id)" class="btn btn-danger" style="width:45px">Xóa</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <img style="width:300px;" src="/src/server/data/img/bannerQC1.png" />
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+<div class="modal fade" id="Modalplaylist" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h3>Add new playlist</h3>
+                <hr>
+                <form ng-submit="vm.addPlaylist()">
+                    <div class="form-group">
+                        <label for="namesong">Tên playlist :</label><br>
+                        <input type="text" class="form-control" placeholder="Tên playlist" ng-model="vm.name" name="name" required="true">
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnSave" type="submit" class="btn btn-success">Thêm</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="Edit" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h3>Sửa playlist</h3>
+                <hr>
+                <form ng-submit="vm.editPlaylist(vm.selectObj)">
+                    <div class="form-group">
+                        <label for="namesong">Tên playlist :</label><br>
+                        <input type="text" class="form-control" placeholder="Tên playlist" ng-model="vm.selectObj.name" name="name" required="true"><br>
+                        <label>Danh sách bài hát:</label><br>
+                        <div ng-repeat="song in vm.selectObj.listsong">{{$index+1}} - {{song.name}}<a> <i class="fa fa-ban" aria-hidden="true" style="color:red" ng-click="vm.deleteSong(vm.selectObj.id,song.id)"></i></a></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnSave" type="submit" class="btn btn-success">Lưu</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

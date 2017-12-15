@@ -1,0 +1,89 @@
+<section class="mainbar" style="padding: 0 10px;">
+  <section class="matter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 widget-content">
+                <div class="row">
+                  <div class="col-md-12" style="padding-top:5px;">
+                      <ul class="nav nav-tabs">
+                          <li ng-class="{active:vm.isActiveTab(1)}"><a href="#" ng-click="vm.changeTab(1)">Bài hát</a></li>
+                          <li ng-class="{active:vm.isActiveTab(2)}"><a href="#" ng-click="vm.changeTab(2)">Album</a></li>
+                          <li ng-class="{active:vm.isActiveTab(3)}"><a href="#" ng-click="vm.changeTab(3)">Video</a></li>
+                      </ul>
+                  </div>
+                </div>
+                <div class="row" style="padding-top:10px;">
+                  <div class="col-xs-offset-10 col-xs-2 col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2">
+                    <select name="singleSelect" id="singleSelect" ng-model="vm.select" style="float:right"> 
+                      <option value="update">Mới</option> <!-- interpolation -->
+                      <option value="-plays">Nghe nhiều</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row" style="margin-left:5px;">
+                  <div ng-show='vm.tabHientai==1' id="Tam-unit-list">
+                    <h5 style="margin-top:-30px">Có {{vm.songs.length}} kết quả</h5>
+                    <div style="padding:14px;" class="row vi-list" ng-repeat="song in vm.songs | orderBy : vm.select">
+                      <div class="col-sm-12 baihat_bxh">
+                        <!-- nội dung  của "Tất cả bài hát" -->
+                        <a class="vi-titms" style="font-size:18px" ui-sref="songDetail({songID:song._id})">{{song.name}}</a> - <a href="" style="font-size:18px">{{song.singer}}</a> <br>
+                        <span class="kh-songText">Thể loại: </span>
+                        <a class="vi-songText" href="">Việt nam, {{song.genre}}</a><br>
+                        <span class="kh-songText">Ngày đăng:</span> 
+                        <span class="vi-songText">{{song.update}} </span>
+                        <span class="kh-songText">Lượt nghe:</span> 
+                        <span class="vi-songText">{{song.plays}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="margin-left:5px;">
+                  <div ng-show="vm.tabHientai==2" id="Tam-unit-list">
+                    <h3 style="margin-top:-30px">Có 3 kết quả</h3>
+                    <div class="row vi-list" style="padding:14px" ng-repeat="listAlbum in vm.ListAlbums">
+                      <div class="col-xs-9 col-sm-2 col-md-2">
+                        <a class="vi-contain">
+                          <img class="img-responsive vi-img" src="images/lactroi.jpg" >
+                          <!-- <div class="vi-middle">
+                              <img src="images/play-button.png" height="30px;" width="30px;">
+                          </div> -->
+                        </a>
+                      </div>
+                      <div class="col-xs-12 col-sm-9 col-md-9">
+                        <a class="vi-titms" style="font-size:18px">{{listAlbum.Name}}</a><br>
+                        <a class="vi-songText" href="">{{listAlbum.Singer}}</a><br>
+                        <span class="kh-songText">Thể loại : </span><a class="vi-songText" href=""> {{listAlbum.Country}},  {{listAlbum.Type}}</a><br>
+                        <span class="kh-songText">Lượt nghe : </span><span class="vi-songText"> {{listAlbum.Plays}}</span> <br>
+                        <span class="kh-songText">Ngày đăng : </span><span class="vi-songText"> {{listAlbum.Date}} </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- tab video -->
+                <div class="row" style="margin-left:5px;">
+                  <div ng-show="vm.tabHientai==3" id="Tam-unit-list">
+                    <h5 style="margin-top:-30px">Có {{vm.videos.length}} kết quả</h5>
+                    <div class="row vi-list" style="padding:14px" ng-repeat="video in vm.videos">
+                      <div class="col-xs-9 col-sm-2 col-md-2">
+                        <a class="vi-contain" ui-sref="videoDetail({videoID:video._id})">
+                          <img class="img-responsive vi-img" ng-src="/src/server/data/img/{{video.img}}" >
+                        </a>
+                      </div>
+                      <div class="col-xs-12 col-sm-9 col-md-9">
+                        <a class="vi-titms" style="font-size:18px">{{video.name}}</a><br>
+                        <a href="" style="font-size:18px">{{video.singer}}</a><br>
+                        <span class="kh-songText">Thể loại : </span><a class="vi-songText" href=""> Việt nam,  {{video.genre}}</a><br>
+                        <span class="kh-songText">Lượt nghe : </span><span class="vi-songText"> {{video.plays}}</span> <br>
+                        <span class="kh-songText">Ngày đăng : </span><span class="vi-songText"> {{video.update}} </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        <div class="col-md-3">
+              <img style="width:300px;" src="/src/server/data/img/bannerQC1.png"/>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

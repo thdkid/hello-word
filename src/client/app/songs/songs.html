@@ -1,0 +1,85 @@
+<section id="dashboard-view" class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <!-- cua tao - Viet -->
+            <div class="vi-main" style="margin:20px 20px 20px 25px">
+                <!-- Content -->
+                <div class="row vi-row">
+                    <!-- Row left -->
+                    <!-- Album Viet Nam-->
+                    <div class="row">
+                        <div class="row vi-head">
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <h4 class="vi-nav"><a class="vi-type" style="color:green;width:100px;" href="">VIỆT NAM</a>
+                                    <div class="vi-tl pull-right">
+                                        <a style="color:green" href="#">Những bài hát mới nhất</a> 
+                                        <!-- <a href="#">Mới</a> -->
+                                    </div>
+                                </h4>
+                            </div>
+                        </div>
+                        <div ng-repeat="song in vm.songsViet" class="col-xs-6 col-sm-4 col-md-2 portfolio-item" style="padding-left:0px;">
+                            <a class="vi-contain" ui-sref="songDetail({songID:song._id})">
+                                    <img class="img-responsive vi-img" ng-src="/src/server/data/img/{{song.img}}" >
+                                    <div class="vi-title"><b>{{song.name}}</b><br><small>{{song.singer}}</small></div>
+                                    <div class="vi-middle">
+                                        <img src="/src/server/data/img/play-button.png" height="80px;" width="80px;">
+                                    </div>
+                                </a>
+                        </div>
+                    </div>
+                    <!--end Viet Nam -->
+                    <!-- Au My-->
+                    <div class="row">
+                        <div class="row vi-head">
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <h4 class="vi-nav"><a class="vi-type" style="color:green;width:100px;" href="">ÂU MỸ</a>
+                                    <div class="vi-tl pull-right">
+                                        <!-- <a style="color:green" href="#">Hot</a> /
+                                        <a href="#">Mới</a> -->
+                                    </div>
+                                </h4>
+                            </div>
+                        </div>
+                        <div ng-repeat="song in vm.songsAuMy" class="col-xs-6 col-sm-4 col-md-2 portfolio-item" style="padding-left:0px;">
+                            <a class="vi-contain" ui-sref="songDetail({songID:song._id})">
+                                    <img class="img-responsive vi-img" ng-src="/src/server/data/img/{{song.img}}" >
+                                    <div class="vi-title"><b>{{song.name}}</b><br><small>{{song.singer}}</small></div>
+                                    <div class="vi-middle">
+                                        <img src="/src/server/data/img/play-button.png" height="80px;" width="80px;">
+                                    </div>
+                                </a>
+                        </div>
+                    </div>
+                    <!-- End Song Au My -->
+                    <!-- Song Hàn Quốc -->
+                    <div class="row">
+                        <div class="row vi-head">
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <h4 class="vi-nav"><a class="vi-type" style="color:green;width:100px;" href="">HÀN QUỐC</a>
+                                    <div class="vi-tl pull-right">
+                                        <!-- <a style="color:green" href="#">Hot</a> /
+                                        <a href="#">Mới</a> -->
+                                    </div>
+                                </h4>
+                            </div>
+                        </div>
+                        <div ng-repeat="song in vm.songsHan" class="col-xs-6 col-sm-4 col-md-2 portfolio-item" style="padding-left:0px;">
+                            <a class="vi-contain" ui-sref="songDetail({songID:song._id})">
+                                    <img class="img-responsive vi-img" ng-src="/src/server/data/img/{{song.img}}" >
+                                    <div class="vi-title"><b>{{song.name}}</b><br><small>{{song.singer}}</small></div>
+                                    <div class="vi-middle">
+                                        <img src="/src/server/data/img/play-button.png" height="80px;" width="80px;">
+                                    </div>
+                                </a>
+                        </div>
+                    </div>
+                    <!--end Song Hàn Quốc -->
+                </div>
+            </div>
+            <!-- / Content -->
+        </div>
+        <!--/ container-->
+        </div>
+    </section>
+</section>

@@ -1,0 +1,10 @@
+<header class="clearfix">
+    <ht-top-nav navline="vm.navline"></ht-top-nav>
+</header>
+<section class="content" style="margin-top:10px">
+    <div ng-include="'app/layout/sidebar.html'"></div>
+
+    <div ui-view="content"></div>
+
+    <div ng-include="'app/layout/footer.html'"></div>
+</section>

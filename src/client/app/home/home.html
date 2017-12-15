@@ -1,0 +1,160 @@
+<section id="dashboard-view" class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <!-- cua tao - Viet -->
+            <div class="vi-main" style="margin-left: 10px;">
+                <div class="row">
+                    <div class="col-md-8" style="padding:0px">
+                        <!-- slider -->
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarousel" data-slide-to="1"></li>
+                                <li data-target="#myCarousel" data-slide-to="2"></li>
+                                <li data-target="#myCarousel" data-slide-to="3"></li>
+                            </ol>
+
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img style='height:300px' class="vi-img img-responsive" src="/src/server/data/img/slider1.jpg" alt="Cold Water">
+                                </div>
+
+                                <div class="item">
+                                    <img style='height:300px' class="vi-img img-responsive" src="/src/server/data/img/slider2.jpg" alt="Cold Water">
+                                </div>
+
+                                <div class="item">
+                                    <img style='height:300px' class="vi-img img-responsive" src="/src/server/data/img/slider3.jpg" alt="Cold Water">
+                                </div>
+                                <div class="item">
+                                    <img style='height:300px' class="vi-img img-responsive" src="/src/server/data/img/slider4.jpg" alt="Cold Water">
+                                </div>
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" data-target="#myCarousel" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                            <a class="right carousel-control" data-target="#myCarousel" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                        </div>
+                        <!--/ slider -->
+                    </div>
+                    <!--/ row -->
+                    <div class="col-md-4" style="padding:0 10px">
+                        <div>
+                            <img class="img-responsive" src="/src/server/data/img/banner.png" alt="" style="margin:auto">
+                        </div>
+                    </div>
+                </div>
+                <!-- Content -->
+                <div class="row vi-row">
+                    <!-- Row left -->
+                    <div class="col-md-8 col-xs-12 col-sm-12" style="padding:0">
+                        <!-- Album-->
+                        <div class="col-md-12 col-xs-12 col-sm-12" style="padding:0">
+                            <div class="col-md-12 col-xs-12 col-sm-12 vi-head" style="padding-left:0px">
+                                <div class="col-md-12 col-sm-12 col-lg-12" style="padding:0">
+                                    <h4 class="vi-nav" style="margin-right: 0px;"><a class="vi-type" style="color:green;width:100px;" href="">BÀI HÁT</a>
+                                        <div class="vi-tl pull-right">
+                                            <a style="color:green" href="#">Hot</a> /
+                                            <a href="#">Mới</a>
+                                        </div>
+                                    </h4>
+                                </div>
+                            </div>
+                            <!--Item -->    
+                            <div ng-repeat="song in vm.songs|limitTo:8" class="col-xs-6 col-sm-4 col-md-3 portfolio-item" style="padding-left:0px;">
+                                <a class="vi-contain" ui-sref="songDetail({songID:song._id})" ng-click="vm.goTop()">
+                                    <img class="img-responsive vi-img" ng-src="/src/server/data/img/{{song.img}}" alt="{{song.name}}">
+                                    <div class="vi-title"><b>{{song.name}}</b><br><small>{{song.singer}}</small></div>
+                                    <div class="vi-middle">
+                                        <img src="/src/server/data/img/play-button.png" height="80px;" width="80px;" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                            <!--end Item -->
+                        </div>
+                        <!--end Album -->
+                        <!-- Video-->
+                        <div class="col-md-12 col-xs-12 col-sm-12" style="padding:0">
+                            <div class="col-md-12 col-xs-12 col-sm-12 vi-head" style="padding-left:0px">
+                                <div class="col-md-12 col-sm-12 col-lg-12" style="padding:0">
+                                    <h4 class="vi-nav" style="margin-right: 0px;"><a class="vi-type" style="color:green;width:100px;" href="">VIDEO</a>
+                                        <div class="vi-tl pull-right">
+                                            <a style="color:green" href="#">Hot</a> /
+                                            <a href="#">Mới</a>
+                                        </div>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div ng-repeat="video in vm.videos|limitTo:8" class="col-xs-6 col-sm-4 col-md-3 portfolio-item" style="padding-left:0px;">
+                                <a class="vi-contain" ui-sref="videoDetail({videoID:video._id})" ng-click="vm.goTop()" href="#">
+                                    <img class="img-responsive vi-img"  ng-src="/src/server/data/img/{{video.img}}" alt="{{video.name}}">
+                                    <div class="vi-title"><b>{{video.name}}</b><br><small>{{video.singer}}</small></div>
+                                    <div class="vi-middle">
+                                        <img src="/src/server/data/img/play-button.png" height="80px;" width="80px;" alt="">
+                                    </div>
+                                </a>
+                            </div>          
+                        </div>
+                        <!--end Video -->
+                    </div> <!-- end Row left -->
+                    <!-- Row right -->
+                    <div class="col-md-4 col-xs-12 col-sm-12">
+                        <!--BXH-->
+                        <h4 class="vi-nav"><a href="#">Bảng xếp hạng</a></h4>
+                        <ul class="nav nav-tabs" id="menu" style="margin-right: 15px;">
+                            <li ng-class="{active:vm.isActiveTab(1)}"><a href="" ng-click="vm.changeTab(1)">Song</a></li>
+                            <li ng-class="{active:vm.isActiveTab(2)}"><a href="" ng-click="vm.changeTab(2)">Album</a></li>
+                            <li ng-class="{active:vm.isActiveTab(3)}"><a href="" ng-click="vm.changeTab(3)">Video</a></li>
+                        </ul>
+                        <div style="height:auto;">
+                            <!--Music-->
+                            <div class="row vi-list" ng-show="vm.currentTab==1" ng-repeat="song in vm.songs">
+                                <a ui-sref="songDetail({songID:song._id})">
+                                    <div class="col-xs-1 col-md-1" style="margin-top:10%; font-size:30px; text-align: center; padding-left:0">
+                                        {{$index+1}}
+                                    </div>
+                                    <div class="col-xs-3 col-md-3" style="padding:0">
+                                        <img class="img-rounded" style="width:100%;margin:4px;" ng-src=/src/server/data/img/{{song.img}} alt="">
+                                    </div>
+                                    <div class="col-xs-8 col-md-8" style="margin-top:5px;">
+                                        <b>{{song.name}}</b><br><small>{{song.singer}}</small>
+                                    </div>
+                                </a>
+                            </div>
+                            <!--Music-->
+                            <div ng-show="vm.currentTab==2">
+                                Trong này vẫn chưa cập nhật
+                            </div>
+                            <!--Video-->
+                            <div class="row vi-list" ng-show="vm.currentTab==3" ng-repeat="video in vm.videos">
+                                <a ui-sref="videoDetail({videoID:video._id})">
+                                    <div class="col-xs-1 col-md-1" style="margin-top:10%; font-size:30px; text-align: center; padding-left:0">
+                                        {{$index+1}}
+                                    </div>
+                                    <div class="col-xs-3 col-md-3" style="padding:0">
+                                        <img class="img-rounded" style="width:100%;margin:4px;" ng-src=/src/server/data/img/{{video.img}} alt="">
+                                    </div>
+                                    <div class="col-xs-8 col-md-8" style="margin-top:5px;">
+                                        <b>{{video.name}}</b><br><small>{{video.singer}}</small>
+                                    </div>
+                                </a>
+                            </div>
+                            <!--Video-->
+                        </div>
+                    </div>
+                    <!--end BXH-->        
+                </div> <!-- end Row right -->
+                <!-- / Content -->
+            </div>
+            <!--/ container-->
+        </div>
+    </section>
+</section>

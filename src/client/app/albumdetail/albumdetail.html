@@ -1,0 +1,98 @@
+<section class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row" style="padding:0 10px">
+                <div class="col-md-8" style="padding:0 10px">
+                    <!--8/12-->
+                    <div class="row col-md-12" style="padding:0">
+                        <div class="column add-bottom">
+                            <div id="mainwrap">
+                                <div id="nowPlay">
+                                    <span class="left" id="npAction">Paused...</span>
+                                    <span class="right" id="npTitle"></span>
+                                </div>
+                                <div id="audiowrap">
+                                    <div id="audio0">
+                                        <audio preload id="audio1" controls="controls" style="width:100%">Your browser does not support HTML5 Audio!</audio>
+                                    </div>
+                                    <div id="tracks">
+                                        <a id="btnPrev">&laquo;</a>
+                                        <a id="btnNext">&raquo;</a>
+                                    </div>
+                                </div>
+                                <div id="plwrap">
+                                    <ul id="plList" style="padding:0"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Album-->
+                        <div class="col-md-12 col-xs-12 col-sm-12" style="padding:0">
+                            <div class="col-md-12 col-xs-12 col-sm-12 vi-head" style="padding:0 0 0 0">
+                                <div class="col-md-12 col-sm-12 col-lg-12" style="padding:0">
+                                    <h4 class="vi-nav">
+                                        <a class="vi-type" style="color:green;width:100px;" href="">LIÊN QUAN</a>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div ng-repeat="song in vm.songsinger" class="col-xs-6 col-sm-4 col-md-3 portfolio-item" style="padding-left:0px;">
+                                <a ui-sref="songDetail({songID:song._id})">
+                            <img class="img-responsive" src="\src\server\data\img\{{song.img}}" alt="Cold Water">
+                            <div class="vi-title"><b>{{song.name}}</b><br><small>{{song.singer}}</small></div>
+                        </a>
+                            </div>
+                        </div>
+                        <!--end Album -->
+                    </div>
+                </div>
+                <div class="col-md-4" style="padding:0 10px">
+                    <!--Banner-->
+                    <img class="img-responsive" src="/src/server/data/img/banner.png" alt="" style="margin:auto">
+                    <!--END Banner-->
+                    <!--BXH-->
+                    <h4 class="vi-nav" style="margin-right:0px"><a href="#">Có thể bạn sẽ thích</a></h4>
+                    <div style="height:auto;">
+                        <div class="row vi-list" ng-repeat="song in vm.songs">
+                            <a ui-sref="songDetail({songID:song._id})">
+                                <div class="col-xs-1 col-md-1" style="margin-top:10%; font-size:30px; text-align: center; padding-left:0">
+                                    {{$index+1}}
+                                </div>
+                                <div class="col-xs-3 col-md-3" style="padding:0">
+
+                                    <img class="img-rounded" style="width:100%;margin:4px;" ng-src=\src\server\data\img\{{song.img}} alt="">
+                                </div>
+                                <div class="col-xs-8 col-md-8" style="margin-top:5px;">
+                                    <b>{{song.name}}</b><br><small>{{song.singer}}</small>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!--end BXH-->
+            </div>
+        </div>
+        </div>
+    </section>
+</section>
+<div ng-if="vm.auth.isAuthenticated()" class="modal fade" id="AddPlaylist" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h3>Thêm vào Playlist</h3>
+                <hr>
+                <form ng-submit="vm.addtoPlaylist()">
+                    <div class="form-group">
+                        <label for="namesong">Chọn playlist :</label><br>
+                        <select name="singleSelect" id="singleSelect" ng-model="vm.playlistSelect"> 
+                            <option value="">Chọn Playlist</option> <!-- interpolation -->
+                            <option ng-repeat="playlist in vm.playlists" value="{{playlist._id}}">{{playlist.name}}</option> <!-- interpolation -->
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnSave" type="submit" class="btn btn-success">Thêm</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

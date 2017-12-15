@@ -1,0 +1,100 @@
+<div id="content-admin">
+    <div id="content-header">
+        <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="current">Bài hát</a>            </div>
+        <h1>Bài hát</h1>
+    </div>
+    <div class="dataTables_filter" style="margin-top:30px">
+        <label>Search: <input type="" name="" value=""></label>
+    </div>
+    <div class="container-fluid">
+        <div style="padding-top:15px"><hr></div>
+        <div class="row-fluid">
+          <div class="widget-box">
+              <div class="widget-content nopadding">
+                  <table class="table table-bordered data-table">
+                      <thead>
+                          <tr>
+                            <th>Tên bài hát</th>
+                            <th>Ca sĩ</th>
+                            <th>Nhạc sĩ</th>
+                            <th>Thể loại</th>
+                            <th>URL</th>
+                            <th>Hình ảnh</th>
+                            <th>Lời bài hát</th>
+                            <th><input class="btn btn-primary" ng-click="vm.Add()" data-toggle="modal" data-target="#myModal"
+                                    type="button" value="Thêm" /></th>
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <form name="form" method="post" enctype="multipart/form-data">
+                                              <div class="form-group">
+                                                <label for="namesong">Tên bài hát :</label><br>
+                                                <input type="text" class="form-control" placeholder="Tên bài hát" ng-value="vm.stitle" ng-model="vm.name" name="name">
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="namesing">Ca sĩ :</label><br>
+                                                <input type="text" class="form-control" placeholder="Tên ca sĩ" ng-value="sing" ng-model="vm.singer">
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="namemusician">Nhạc sĩ :</label><br>
+                                                <input type="text" class="form-control" placeholder="Tên nhạc sĩ" ng-value="musician" ng-model="vm.artist">
+                                               </div>
+                                               <div class="form-group">
+                                                <label for="casename">Thể loại :</label><br>
+                                                <input type="text" class="form-control" placeholder="Thể loại" ng-value="case" ng-model="vm.case">
+                                              </div>
+                                               <div class="form-group">
+                                                <label for="namesong">Hình đại diện :</label><br>
+                                                <input type="file" ngf-select="" name="filehinh" onchange="angular.element(this).scope().checkfile(this)" ng-model="vm.img" required="">
+                                                <img ng-if="!vm.showdbs" ngf-src="vm.img" width="50px" height="50px" alt="">
+                                                <img ng-if="vm.showdbs" ngf-src="FILE||'./src/server/data/img/'+vm.img" width="50px" height="50px" alt="">
+                                              </div>
+                                               <div class="form-group">
+                                                <label for="namesong">File mp3 :</label><br>
+                                                <input type="file" ngf-select="" name="fileMp3" ng-model="vm.url" required="">
+                                                <!-- <img ng-if="!vm.showdbs" ngf-src="vm.url" width="50px" height="50px" alt="">
+                                                <img ng-if="vm.showdbs" ngf-src="FILE||'./src/server/data/songs/'+vm.url" width="50px" height="50px" alt="">
+                                                -->
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="lyric">Lời bài hát :</label><br>
+                                                <textarea type="text" class="form-control" ng-model="vm.lyric" placeholder="Lời bài hát .."></textarea>
+                                              </div>
+                                            </form>
+                                            <button id="btnSave" type="submit" data-dismiss="modal" ng-click="vm.DataInput(vm.id)" class="btn btn-success">Save</button>
+                                            <button id="btnClear" type="submit" ng-click="vm.resetData()" class="btn btn-success">Clear</button>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </tr>
+                    </thead>
+                            <tbody>
+                                <tr ng-repeat="song in vm.songs">
+                                    <div class="editText">
+                                        <td style="text-align:center;">{{song.name}}</td>
+                                        <td style="text-align:center;">{{song.singer}}</td>
+                                        <td style="text-align:center;">{{song.artist}}</td>
+                                        <td style="text-align:center;">{{song.case}}</td>
+                                        <td style="text-align:center;">{{song.url}}</td>
+                                        <td style="text-align:center;">{{song.img}}</td>
+                                        <td style="text-align:center;">{{song.lyrics}}</td>
+                                    </div>
+                                    <td style="width:135px">
+                                      <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="vm.Edit(song._id)" type="button">Sửa</button>
+                                      <button class="btn btn-primary" ng-click="vm.Del(song._id);" type="button">Xóa</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

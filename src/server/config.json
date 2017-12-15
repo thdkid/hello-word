@@ -1,0 +1,9 @@
+{
+  "PORT": 3000,
+  "BASE_URL": "/api",
+
+  "mongodb": {
+    "host": "Rou:745105th@ds141796.mlab.com:41796",
+    "database": "webdb"
+  }
+}

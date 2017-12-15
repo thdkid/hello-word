@@ -1,0 +1,108 @@
+<section class="mainbar" style="padding: 0 10px;">
+  <section class="matter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 widget-content user">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h3 style="color: blueviolet;" >BẢNG XẾP HẠNG</h3>
+                    </div>
+                    <div class="col-md-4 featurette" id="about" style="padding-left:0px">
+                        <div class="container-fluid">
+                            <div id="Tam-custom_carousel">
+                                <div style="float:right">
+                                    <div class="T-controls">
+                                        <ul class="nav">
+                                            <li ng-class="{active:vm.isActiveTab1(0)}">
+                                            <a href="#" ng-click="vm.changeTab1(0)">Việt Nam</a>
+                                            </li>
+                                            <li ng-class="{active:vm.isActiveTab1(1)}">
+                                            <a href="#" ng-click="vm.changeTab1(1)">Âu Mỹ</a>
+                                            </li>
+                                            <li ng-class="{active:vm.isActiveTab1(2)}">
+                                            <a href="#" ng-click="vm.changeTab1(2)">Hàn Quốc</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12" style="padding-top:5px;">
+                      <ul class="nav nav-tabs">
+                          <li ng-class="{active:vm.isActiveTab2(0)}">
+                              <a href="#" ng-click="vm.changeTab2(0)">Bài hát</a>
+                          </li>
+                          <li ng-class="{active:vm.isActiveTab2(1)}">
+                              <a href="#" ng-click="vm.changeTab2(1)">Album</a>
+                          </li>
+                          <li ng-class="{active:vm.isActiveTab2(2)}">
+                              <a href="#" ng-click="vm.changeTab2(2)">Video</a>
+                          </li>
+                      </ul>
+                  </div>
+                </div>
+                <div class="row" style="padding-top:10px;">
+                    <div class="col-xs-10 col-sm-10 col-md-10">
+                        <button style="margin-left:0px;" type="button" class="btn btn-default"><span class="glyphicon glyphicon-triangle-right"></span> Nghe tất cả</button>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2">
+                        <div class="dropdown" style="float:right">
+                            <button style="margin-right:0px;" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Sắp xếp theo
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Chia sẻ nhiều nhất</a></li>
+                                <li><a href="#">Nghe nhiều nhất</a></li>
+                                <li><a href="#">Thích nhiều nhất</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-left:5px;">
+                  <div style="padding-bottom:15px;" ng-show="vm.thaydoiTab2==0" ng-repeat="song in vm.songs" id="Tam-unit-list" class="row vi-list">
+                    <div class="col-xs-1 col-sm-1 col-md-1">
+                        <p id="Tam-STT">{{$index + 1}}</p>
+                    </div>
+                    <div class="col-xs-4 col-sm-2 col-md-2">
+                        <img class="img-rounded" ng-src="/src/server/data/img/{{song.img}}" ui-sref="songDetail({songID:song._id})" />
+                    </div>
+                    <div class="col-xs-4 col-sm-8 col-md-8" id="Tam-name-singer">
+                        <p class="Tam-name"><a ui-sref="songDetail({songID:song._id})">{{song.name}}</a></p>
+                        <p class="Tam-singer"><a href="#">{{song.singer}}</a></p>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1" style="padding-top:25px;">
+                        <a href="#"><span id="btn-icon" class="glyphicon glyphicon-plus"></span></a>
+                        <a href="#"><span id="btn-icon" class="glyphicon glyphicon-share-alt"></span></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="margin-left:5px;">
+                  <div style="padding-bottom:15px" ng-show="vm.thaydoiTab2==2" ng-repeat="video in vm.videos" id="Tam-unit-list" class="row vi-list">
+                    <div class="col-xs-1 col-sm-1 col-md-1">
+                        <p id="Tam-STT">{{$index + 1}}</p>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2">
+                        <img class="img-rounded" ng-src="/src/server/data/img/{{video.img}}" ui-sref="videoDetail({videoID:video.id})" />
+                    </div>
+                    <div class="col-xs-7 col-sm-7 col-md-7" id="Tam-name-singer">
+                        <p class="Tam-name"><a ui-sref="videoDetail({videoID:video._id})">{{video.name}}</a></p>
+                        <p class="Tam-singer"><a href="#">{{video.singer}}</a></p>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2">
+                        <a href="#"><span id="btn-icon" class="glyphicon glyphicon-plus"></span></a>
+                        <a href="#"><span id="btn-icon" class="glyphicon glyphicon-share-alt"></span></a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                  <img style="width:300px;" src="/src/server/data/img/bannerQC1.png"/>
+            </div>
+        </div>
+    </div>
+  </section>
+</section>

@@ -1,0 +1,66 @@
+<div id="content-admin">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="current">Bài hát</a>      </div>
+    <h1>Ca sĩ</h1>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <form name="form" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="namesing">Tên ca sĩ :</label><br>
+              <input type="text" class="form-control" placeholder="Tên ca sĩ" ng-model="vm.name" name="name">
+            </div>
+          </form>
+          <button id="btnSave" type="submit" data-dismiss="modal" ng-click="vm.DataInput(vm.id)" class="btn btn-success">Save</button>
+          <button id="btnClear" type="submit" ng-click="vm.resetData()" class="btn btn-success">Clear</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+      </div>
+    </div>
+  </div>
+  <!-- end Modal-->
+  <div class="dataTables_filter" style="margin-top:30px">
+    <label>Search: <input type="" name="" value=""></label>
+  </div>
+
+  <div class="container-fluid">
+    <div style="padding-top:15px">
+      <hr>
+    </div>
+    <div class="row-fluid">
+      <div class="widget-box">
+        <div class="widget-content nopadding">
+          <table class="table table-bordered data-table">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Tên ca sĩ</th>
+                <th><input class="btn btn-primary" ng-click="vm.Add()" data-toggle="modal" data-target="#myModal" type="button"
+                    value="Thêm" /></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="singer in vm.singers">
+                <div class="editText">
+                  <td style="text-align:center;">{{$index+1}}</td>
+                  <td style="text-align:center;">{{singer.name}}</td>
+                </div>
+                <td style="width:135px">
+                  <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="vm.Edit(singer._id)" type="button">Sửa</button>
+                  <button class="btn btn-primary" ng-click="vm.Del(singer._id);" type="button">Xóa</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

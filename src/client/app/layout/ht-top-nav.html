@@ -1,0 +1,82 @@
+<nav class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-header">
+    <a href="/" class="navbar-brand"><span class="brand-title">{{vm.navline.title}}</span></a>
+    <div class="pull-left col-xs-6 col-md-8 col-sm-9" style="margin-top:10px">
+      <div class="input-group">
+        <input type="text" id="searchBox" value="" placeholder="Nhập nội dung cần tìm" style="width:100%" ng-model="vm.query" ng-change="vm.searchNav()"
+          ng-blur="vm.searchHide()" ng-keypress="vm.myFunct($event)">
+        <span class="input-group-btn" id="btn-search">
+          <button class="btn btn-default" type="button" ng-click="vm.goSearch()" style="height:33px">
+            <span class="glyphicon glyphicon-search"></span>
+        </button>
+        </span>
+      </div>
+
+      <ul ng-if="vm.searchShow()" class="dropdown-menu" style="display:inherit;width:88%;margin-left:15px">
+        <div class="row">
+          <li ng-if="vm.isKetQua()" class="col-xs-12 col-md-12 dropdown-header"><b>Songs</b></li>
+          <li class="col-xs-12 col-md-12" ng-repeat="song in vm.songs | limitTo:5">
+            <a class="col-xs-12 col-md-12" ui-sref="songDetail({songID:song._id})">
+                <small style="color:chocolate;font-size:15px">{{song.name}}</small> </br> {{song.singer}}
+              </a>
+          </li>
+          <li class="col-xs-12 col-md-12" ng-if="vm.isKetQua()" role="separator" class="divider"></li>
+          <li ng-if="vm.isKetQua()" class="col-xs-12 col-md-12 dropdown-header"><b>Videos</b></li>
+          <li class="col-xs-12 col-md-12" ng-repeat="video in vm.videos | limitTo:3">
+            <a class="col-xs-12 col-md-12" ui-sref="videoDetail({videoID:video._id})">
+                <small style="color:chocolate;font-size:15px">{{video.name}}</small> </br> {{video.singer}}
+              </a>
+          </li>
+          <li class="col-xs-12 col-md-12" ng-if="!vm.isKetQua()"><a class="col-xs-12 col-md-12" style="color:chocolate">Không có kết quả nào được tìm thấy</a></li>
+        </div>
+      </ul>
+
+    </div>
+
+    <a class="btn navbar-btn navbar-toggle" ng-click="isCollapsed = !isCollapsed">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+  </div>
+
+  <!-- OK -->
+  <div class="navbar-collapse collapse" uib-collapse="isCollapsed">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a ng-if="!vm.auth.isAuthenticated()" ng-click="vm.auth.login()" style="padding:15px 30px 15px 15px"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li class="dropdown">
+            <a ng-if="vm.checkLogin()" class="dropdown-toggle" data-toggle="dropdown" style="padding:12px 30px 5px 15px">
+              <img ng-src="{{ vm.profile.picture }}" class="avatar" alt="avatar" style="width:30px">
+              <span>{{vm.profile.name}}</span>
+            </a>
+            <ul id="more-menu" class="dropdown-menu" style="width:100%">
+              <li><a style="color:chocolate" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-user"> </span> Profile</a></li>
+              <li><a style="color:chocolate" ng-click="vm.playlist()"><span class="glyphicon glyphicon-list-alt"> </span> Playlist</a></li>
+              <li ng-if="vm.checkAdmin()"><a style="color:chocolate" ng-click="vm.goAdmin()"><span class="fa fa-tasks"> </span> Administrator</a></li>
+              <li><a style="color:chocolate" ng-click="vm.logout()"><span class="glyphicon glyphicon-log-out"> </span> Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+</nav>
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h3>Profile</h3>
+        <hr>
+        <center><img ng-src="{{ vm.profile.picture }}" class="img-circle" alt="avatar" style="width:30%"></center>
+        <div class="form-group" style="text-align: center">
+          <label>Name: </label> {{vm.profile.name}} <br>
+          <label>Given Name: </label> {{vm.profile.given_name}} <br>
+          <label>Family Name: </label> {{vm.profile.family_name}} <br>
+          <label>Nickname: </label> {{vm.profile.nickname}} <br>
+          <label>Locale: </label> {{vm.profile.locale}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
